@@ -1,0 +1,22 @@
+appId: hk.borders.vymra
+name: Smoke - Tab Navigation
+tags:
+  - smoke
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+- runFlow: smoke/login_flow.yaml
+- tapOn:
+    id: "tab_health"
+- assertVisible: "Health"
+- tapOn:
+    id: "tab_growth"
+- assertVisible: "Growth Journey"
+- tapOn:
+    id: "tab_settings"
+- assertVisible: "Settings"
+- tapOn:
+    id: "tab_home"
+- assertVisible: "Home"

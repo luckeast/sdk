@@ -1,0 +1,35 @@
+PODS:
+  - Adjust (5.6.2):
+    - Adjust/Adjust (= 5.6.2)
+  - Adjust/Adjust (5.6.2):
+    - AdjustSignature (= 3.67.0)
+  - AdjustSignature (3.67.0)
+  - Flutter (1.0.0)
+  - flutter_secure_storage (6.0.0):
+    - Flutter
+
+DEPENDENCIES:
+  - Adjust (~> 5.6.2)
+  - Flutter (from `Flutter`)
+  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Adjust
+    - AdjustSignature
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_secure_storage:
+    :path: ".symlinks/plugins/flutter_secure_storage/ios"
+
+SPEC CHECKSUMS:
+  Adjust: 62ea53a252534df416676e7ac2f1558d60e6e39e
+  AdjustSignature: 9498705a4ac67b719e31828be4d74fbb8656950c
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_secure_storage: 1ed9476fba7e7a782b22888f956cce43e2c62f13
+
+PODFILE CHECKSUM: a36a4944dccacb27ce2ba8cf42a0621a67a66d43
+
+COCOAPODS: 1.16.2

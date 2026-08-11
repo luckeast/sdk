@@ -1,0 +1,11 @@
+appId: hk.borders.vymra
+name: Smoke - Launch App
+tags:
+  - smoke
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+- assertVisible: "Vymra"
+- assertVisible: "Your Pet's Health Guardian"

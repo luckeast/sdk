@@ -1,0 +1,24 @@
+appId: hk.borders.vymra
+name: Journey - Create Pet Profile
+tags:
+  - journey
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+- runFlow: smoke/login_flow.yaml
+- tapOn:
+    id: "home_create_profile_button"
+- tapOn:
+    id: "pet_name_field"
+- inputText: "Buddy"
+- tapOn:
+    id: "pet_breed_field"
+- inputText: "Golden Retriever"
+- tapOn:
+    id: "pet_weight_field"
+- inputText: "25.5"
+- tapOn:
+    id: "create_profile_submit"
+- assertVisible: "Buddy"

@@ -1,0 +1,20 @@
+appId: hk.borders.vymra
+name: Journey - AI Vet Chat
+tags:
+  - journey
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+- runFlow: smoke/login_flow.yaml
+- tapOn:
+    id: "home_ai_vet_button"
+- assertVisible: "AI Vet Assistant"
+- tapOn:
+    id: "chat_input_field"
+- inputText: "My dog is vomiting"
+- tapOn:
+    id: "chat_send_button"
+- assertVisible: "vomiting"
+- assertVisible: "general information"

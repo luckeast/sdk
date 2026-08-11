@@ -1,0 +1,43 @@
+name: vymra
+description: "Vymra - Pet Health Guardian"
+publish_to: 'none'
+version: 1.0.0+3
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  fl_chart: ^0.68.0
+  image_picker: ^1.1.2
+  permission_handler: ^11.3.1
+  app_tracking_transparency: ^2.0.6
+  in_app_purchase: ^3.2.0
+  in_app_purchase_storekit: ^0.4.9
+  shared_preferences: ^2.2.3
+  flutter_secure_storage: ^9.2.2
+  intl: ^0.20.2
+  path_provider: ^2.1.4
+  http: ^1.2.2
+  webview_flutter: ^4.13.0
+  webview_flutter_wkwebview: ^3.25.1
+  url_launcher: ^6.3.1
+  crypto: ^3.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/legal/
+    - assets/i18n/

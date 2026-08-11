@@ -1,0 +1,17 @@
+appId: hk.borders.vymra
+name: Smoke - Login Flow
+tags:
+  - smoke
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+- tapOn:
+    id: "login_username_field"
+- inputText: "TestUser"
+- tapOn:
+    id: "login_terms_checkbox"
+- tapOn:
+    id: "login_button"
+- assertVisible: "Home"

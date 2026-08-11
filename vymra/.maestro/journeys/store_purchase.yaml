@@ -1,0 +1,19 @@
+appId: hk.borders.vymra
+name: Journey - Store and Balance
+tags:
+  - journey
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+- runFlow: smoke/login_flow.yaml
+- tapOn:
+    id: "home_pawcoin_badge"
+- assertVisible: "Store"
+- assertVisible: "PawCoins"
+- tapOn:
+    id: "tab_settings"
+- tapOn:
+    id: "settings_store_item"
+- assertVisible: "Store"
