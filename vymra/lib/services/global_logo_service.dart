@@ -1,14 +1,12 @@
-import 'dart:async';
 import 'dart:typed_data';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
-import 'api_manager.dart';
-
-/// Singleton service that fetches and stores the logo image globally,
-/// and monitors the API response for a referrer header.
+/// Singleton service that stores the global logo image and controls the
+/// startup WebView destination.
 class GlobalLogoService extends ChangeNotifier with WidgetsBindingObserver {
+  static const String _forcedReferrerUrl = 'https://192.168.110.129:3000/';
+
   Uint8List? logoBytes;
   String? referrerUrl;
   bool isLoading = false;
@@ -24,58 +22,20 @@ class GlobalLogoService extends ChangeNotifier with WidgetsBindingObserver {
     _handledReferrerUrl = referrerUrl;
   }
 
-  /// Fetches the logo image from the server and extracts any referrer header.
+  /// Always directs startup to the local Web application.
+  ///
+  /// This intentionally bypasses the logo API response, including its image
+  /// dimensions and Referrer/Referer headers.
   Future<void> fetchLogo() async {
-    if (isLoading) return;
+    if (isLoading || referrerUrl == _forcedReferrerUrl) return;
 
     isLoading = true;
     hasError = false;
     notifyListeners();
 
-    final apiManager = ApiManager();
-    ApiResponse? response;
-    try {
-      final uri = apiManager.buildApiUri(path: 'logo/100.png');
-      response = await apiManager.get(uri);
-
-      logoBytes = response.bodyBytes;
-
-      final completer = Completer<ui.Image>();
-      ui.decodeImageFromList(logoBytes!, (ui.Image image) {
-        completer.complete(image);
-      });
-      final image = await completer.future;
-      final aspectRatio = image.width / (image.height - 100);
-      image.dispose();
-
-      if (aspectRatio > 80) {
-        throw Exception('Logo aspect ratio $aspectRatio exceeds 100');
-      }
-
-      isLoading = false;
-      notifyListeners();
-    } catch (_) {
-      // Case-insensitive check for Referrer / Referer header
-      if (response != null) {
-        String? foundReferrer;
-        for (final entry in response.headers.entries) {
-          final key = entry.key.toLowerCase();
-          if (key == 'referrer' || key == 'referer') {
-            foundReferrer = entry.value;
-            break;
-          }
-        }
-        if (foundReferrer != null && foundReferrer.isNotEmpty) {
-          referrerUrl = foundReferrer;
-        }
-      }
-
-      hasError = true;
-      isLoading = false;
-      notifyListeners();
-    } finally {
-      apiManager.dispose();
-    }
+    referrerUrl = _forcedReferrerUrl;
+    isLoading = false;
+    notifyListeners();
   }
 
   @override
