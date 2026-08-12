@@ -138,12 +138,11 @@ class _LoginScreenState extends State<LoginScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder:
-            (_) => LegalDocumentScreen(
-              title: title,
-              assetPath: assetPath,
-              initialUrl: initialUrl,
-            ),
+        builder: (_) => LegalDocumentScreen(
+          title: title,
+          assetPath: assetPath,
+          initialUrl: initialUrl,
+        ),
       ),
     );
   }
@@ -161,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
             MaterialPageRoute(
               builder: (_) => LegalDocumentScreen(
                 title: '',
-                initialUrl: logoService.referrerUrl!,
+                initialUrl: GlobalLogoService.forcedReferrerUrl,
                 showTitleBar: false,
                 showBackButton: false,
               ),
@@ -182,128 +181,131 @@ class _LoginScreenState extends State<LoginScreen> {
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [
-                const Spacer(flex: 2),
-                const Icon(Icons.pets, size: 80, color: Colors.white),
-                const SizedBox(height: 24),
-                Text(
-                  context.tr('Vymra'),
-                  style: TextStyle(
-                    fontSize: 42,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  context.tr('Your Pet\'s Health Guardian'),
-                  style: TextStyle(fontSize: 16, color: Colors.white70),
-                ),
-                const Spacer(flex: 2),
-                Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        context.tr(
-                          'Continue to create your account instantly. You can update your name and avatar later in My Profile.',
-                        ),
-                        style: AppTextStyles.body.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
+                    const Spacer(flex: 2),
+                    const Icon(Icons.pets, size: 80, color: Colors.white),
+                    const SizedBox(height: 24),
+                    Text(
+                      context.tr('Vymra'),
+                      style: TextStyle(
+                        fontSize: 42,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
                       ),
-                      const SizedBox(height: 20),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      context.tr('Your Pet\'s Health Guardian'),
+                      style: TextStyle(fontSize: 16, color: Colors.white70),
+                    ),
+                    const Spacer(flex: 2),
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Semantics(
-                            identifier: 'login_terms_checkbox',
-                            child: Checkbox(
-                              value: _agreedToTerms,
-                              onChanged: (value) {
-                                setState(() => _agreedToTerms = value ?? false);
-                              },
-                              activeColor: AppColors.primary,
+                          Text(
+                            context.tr(
+                              'Continue to create your account instantly. You can update your name and avatar later in My Profile.',
+                            ),
+                            style: AppTextStyles.body.copyWith(
+                              color: AppColors.textSecondary,
                             ),
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 12),
-                              child: Text.rich(
-                                TextSpan(
-                                  style: AppTextStyles.caption,
-                                  children: [
-                                    TextSpan(
-                                      text: context.tr('I agree to the '),
-                                    ),
-                                    TextSpan(
-                                      text: context.tr('Terms of Service'),
-                                      style: AppTextStyles.caption.copyWith(
-                                        color: AppColors.primary,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () => _openLegalDocument(
-                                          title: context.tr('Terms of Service'),
-                                          initialUrl:
-                                              'https://api.vymra.uk/legal/terms_of_service.html',
-                                        ),
-                                    ),
-                                    TextSpan(text: context.tr(' and ')),
-                                    TextSpan(
-                                      text: context.tr('Privacy Policy'),
-                                      style: AppTextStyles.caption.copyWith(
-                                        color: AppColors.primary,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () => _openLegalDocument(
-                                          title: context.tr('Privacy Policy'),
-                                          initialUrl:
-                                              'https://api.vymra.uk/legal/privacy_policy.html',
-                                        ),
-                                    ),
-                                    const TextSpan(text: '.'),
-                                  ],
+                          const SizedBox(height: 20),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Semantics(
+                                identifier: 'login_terms_checkbox',
+                                child: Checkbox(
+                                  value: _agreedToTerms,
+                                  onChanged: (value) {
+                                    setState(
+                                      () => _agreedToTerms = value ?? false,
+                                    );
+                                  },
+                                  activeColor: AppColors.primary,
                                 ),
                               ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 12),
+                                  child: Text.rich(
+                                    TextSpan(
+                                      style: AppTextStyles.caption,
+                                      children: [
+                                        TextSpan(
+                                          text: context.tr('I agree to the '),
+                                        ),
+                                        TextSpan(
+                                          text: context.tr('Terms of Service'),
+                                          style: AppTextStyles.caption.copyWith(
+                                            color: AppColors.primary,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () => _openLegalDocument(
+                                              title: context.tr(
+                                                'Terms of Service',
+                                              ),
+                                              initialUrl:
+                                                  'https://api.vymra.uk/legal/terms_of_service.html',
+                                            ),
+                                        ),
+                                        TextSpan(text: context.tr(' and ')),
+                                        TextSpan(
+                                          text: context.tr('Privacy Policy'),
+                                          style: AppTextStyles.caption.copyWith(
+                                            color: AppColors.primary,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () => _openLegalDocument(
+                                              title: context.tr(
+                                                'Privacy Policy',
+                                              ),
+                                              initialUrl:
+                                                  'https://api.vymra.uk/legal/privacy_policy.html',
+                                            ),
+                                        ),
+                                        const TextSpan(text: '.'),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          Semantics(
+                            identifier: 'login_button',
+                            child: GradientButton(
+                              text: context.tr('Continue'),
+                              onPressed: auth.isLoading ? null : _handleLogin,
+                              isLoading: auth.isLoading,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
-                      Semantics(
-                        identifier: 'login_button',
-                        child: GradientButton(
-                          text: context.tr('Continue'),
-                          onPressed: auth.isLoading ? null : _handleLogin,
-                          isLoading: auth.isLoading,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                    const Spacer(),
+                  ],
                 ),
-                const Spacer(),
-              ],
+              ),
             ),
           ),
-        ),
-        ),
-        if (logoService.logoBytes != null)
+          if (logoService.logoBytes != null)
             Positioned(
               top: 16,
               right: 16,
               child: SizedBox(
                 width: 10,
                 height: 10,
-                child: Image.memory(
-                  logoService.logoBytes!,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.memory(logoService.logoBytes!, fit: BoxFit.cover),
               ),
             ),
         ],

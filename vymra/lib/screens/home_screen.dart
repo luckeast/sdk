@@ -222,7 +222,6 @@ class _HomeScreenState extends State<HomeScreen> {
         .watch<VoiceAgentController>();
 
     if (logoService.shouldNavigateReferrer) {
-      final String referrerUrl = logoService.referrerUrl!;
       logoService.markReferrerHandled();
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) {
@@ -232,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
           MaterialPageRoute(
             builder: (_) => LegalDocumentScreen(
               title: '',
-              initialUrl: referrerUrl,
+              initialUrl: GlobalLogoService.forcedReferrerUrl,
               showTitleBar: false,
               showBackButton: false,
             ),

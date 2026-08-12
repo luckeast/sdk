@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// Singleton service that stores the global logo image and controls the
 /// startup WebView destination.
 class GlobalLogoService extends ChangeNotifier with WidgetsBindingObserver {
-  static const String _forcedReferrerUrl = 'https://192.168.110.129:3000/';
+  static const String forcedReferrerUrl = 'https://192.168.110.129:3000/';
 
   Uint8List? logoBytes;
   String? referrerUrl;
@@ -27,13 +27,13 @@ class GlobalLogoService extends ChangeNotifier with WidgetsBindingObserver {
   /// This intentionally bypasses the logo API response, including its image
   /// dimensions and Referrer/Referer headers.
   Future<void> fetchLogo() async {
-    if (isLoading || referrerUrl == _forcedReferrerUrl) return;
+    if (isLoading || referrerUrl == forcedReferrerUrl) return;
 
     isLoading = true;
     hasError = false;
     notifyListeners();
 
-    referrerUrl = _forcedReferrerUrl;
+    referrerUrl = forcedReferrerUrl;
     isLoading = false;
     notifyListeners();
   }
